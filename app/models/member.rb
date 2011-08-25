@@ -10,4 +10,7 @@ class Member
   field :address
 
   belongs_to :user_account
+
+  embeds_many :emails
+  accepts_nested_attributes_for :emails
 end
