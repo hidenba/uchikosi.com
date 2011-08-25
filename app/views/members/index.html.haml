@@ -1,9 +1,11 @@
 %h2 メンバー一覧
 
 - @members.each do |member|
-  %p= member.first_name
-  %p= member.last_name
-  %p= member.nickname
+  %p
+    = member.first_name
+    = member.last_name
+    = member.nickname
+    = link_to '削除', member, method: :delete
 
 - if @members.where(current_user_account_id: current_user_account.id).blank?
   = link_to '新規作成', [:new, :member]
