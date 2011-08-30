@@ -5,7 +5,10 @@
     = member.first_name
     = member.last_name
     = member.nickname
+    - member.emails.each do |email|
+      = email.address
+    = member.due
     = link_to '削除', member, method: :delete
+    = link_to '更新', edit_member_path(member)
 
-- if @members.where(current_user_account_id: current_user_account.id).blank?
-  = link_to '新規作成', [:new, :member]
+= link_to 'アカウント新規作成', [:new, :user_account]

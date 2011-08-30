@@ -6,7 +6,9 @@ class UserAccount
 
   field :login_name
 
-  has_one :member
+  belongs_to :member
+
+  after_create :create_member
 
   validates :login_name, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: { if: :email_required? }
@@ -17,4 +19,8 @@ class UserAccount
 
   def email_required?; false end
   def email_changed?; false end
+
+  def create_member
+    update_attribute(:member_id, Member.create!(nickname: login_name).id)
+  end
 end

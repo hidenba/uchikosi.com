@@ -9,8 +9,12 @@ class Member
   field :city
   field :address
 
-  belongs_to :user_account
+  field :due, type: Boolean
+
+  has_one :user_account, dependent: :delete
 
   embeds_many :emails
   accepts_nested_attributes_for :emails
+
+  validates :nickname, presence: true
 end
