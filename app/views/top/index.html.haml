@@ -1,0 +1,11 @@
+%h2 Top
+
+%p
+  - if current_user_account.present?
+    = link_to 'ダッシュボード', dashboard_path
+  -else
+    = link_to 'ログイン', new_user_account_session_path
+
+%h3 最新情報
+-@events.each do |event|
+  %p= event.name

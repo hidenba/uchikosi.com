@@ -1,4 +1,6 @@
 UchikosiCom::Application.routes.draw do
+  root :to => 'top#index'
+
   devise_for :user_account
 
   resources :user_accounts, only: %w(new create)
@@ -10,4 +12,6 @@ UchikosiCom::Application.routes.draw do
   resources :events do
     resources :stages
   end
+
+
 end
