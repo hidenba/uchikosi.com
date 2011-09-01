@@ -1,0 +1,18 @@
+= javascript_tag do
+  $(function() {
+  $("input:submit, a, button").button();
+  });
+
+%h2 イベント一覧
+
+- @events.each do |event|
+  %p
+    = event.name
+    = event.description
+    - event.stages.each do |stage|
+      = stage.place
+      = l stage.schedule, format: :middle
+    = link_to '削除', event, method: :delete
+    = link_to '更新', edit_event_path(event)
+
+= link_to 'イベント作成', [:new, :event]

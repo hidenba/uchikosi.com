@@ -6,4 +6,8 @@ UchikosiCom::Application.routes.draw do
   resource :dashboard, only: %w(show)
 
   resources :members, except: %w(new create)
+
+  resources :events do
+    resources :stages
+  end
 end

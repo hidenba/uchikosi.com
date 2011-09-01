@@ -1,0 +1,27 @@
+- @event.errors.full_messages.each do |e|
+  %p= e
+
+= form_for @event do |f|
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :description
+    = f.text_area :description
+
+    = f.fields_for :stages, @event.stages do |m|
+      %p
+        = m.label :place
+        = m.text_field :place
+      %p
+        = m.label :schedule
+        = m.text_field :schedule, value: m.object.schedule ? m.object.schedule.strftime('%Y/%m/%d %H:%M') : ''
+
+  = f.submit
+
+= javascript_tag do
+  $(function() {
+  $('#event_stages_attributes_0_schedule').datetimepicker({
+  dateFormat: 'yyyy/mm/dd HH:MM'
+  });
+  });
