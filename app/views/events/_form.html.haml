@@ -2,26 +2,31 @@
   %p= e
 
 = form_for @event do |f|
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :description
-    = f.text_area :description
+  %fieldset
+    %legend イベント
+    %p
+      = f.label :namein
+      = f.text_field :name
+    %p
+      = f.label :description
+      = f.text_area :description
 
-    = f.fields_for :stages, @event.stages do |m|
+  = f.fields_for :stages, @event.stages do |m|
+    %fieldset.stage
+      %legend ステージ
       %p
         = m.label :place
         = m.text_field :place
       %p
         = m.label :schedule
-        = m.text_field :schedule, value: m.object.schedule ? m.object.schedule.strftime('%Y/%m/%d %H:%M') : ''
+        = m.text_field :schedule, value: m.object.schedule ? m.object.schedule.strftime('%Y/%m/%d %H:%M') : '', class: 'schedule_date_time'
 
   = f.submit
 
-= javascript_tag do
-  $(function() {
-  $('#event_stages_attributes_0_schedule').datetimepicker({
-  dateFormat: 'yyyy/mm/dd HH:MM'
-  });
-  });
+= content_for :javascript do
+  :javascript
+    $(function() {
+      $('.schedule_date_time').datetimepicker({
+        dateFormat: 'yyyy/mm/dd HH:MM'
+      });
+    });

@@ -1,4 +1,10 @@
 %h2 Hoge
 
+今後の予定
+- Event.future_plan.each do |event|
+  %p
+    = event.name
+    = event.date
+
 %p= link_to 'メンバー一覧', :members
 %p= link_to 'イベント一覧', :events

@@ -4,7 +4,16 @@ class Event
   field :name
   field :description
 
-  has_many :stages, dependent: :delete, autosave: true
+
+  embeds_many :stages
   accepts_nested_attributes_for :stages
 
+  validates :name, presence: true
+
+  default_scope asc("stages.schedule")
+  scope :future_plan, where("stages.schedule".to_sym.gt => Time.now)
+
+  def date
+    stages.min(:schedule).to_date
+  end
 end

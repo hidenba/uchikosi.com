@@ -4,5 +4,7 @@ class Stage
   field :place
   field :schedule, type: DateTime
 
-  belongs_to :event
+  embedded_in :event
+
+  validates :place, presence: true
 end
