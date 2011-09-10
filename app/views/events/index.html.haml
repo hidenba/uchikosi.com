@@ -7,8 +7,7 @@
     - event.stages.each do |stage|
       = stage.place
       = l stage.schedule, format: :middle if stage.schedule.present?
-    = link_to '削除', event, method: :delete
-    = link_to '更新', edit_event_path(event)
-
+    = event.staffs.count
+    = link_to '詳細', event_path(event)
 = link_to 'イベント作成', [:new, :event]
 = link_to 'ダッシュボード', dashboard_path

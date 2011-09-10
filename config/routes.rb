@@ -9,8 +9,10 @@ UchikosiCom::Application.routes.draw do
 
   resources :members, except: %w(new create)
 
+
   resources :events do
     resources :stages
+    resources :staffs, only: %w(create destroy)
   end
 
 

@@ -6,6 +6,10 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
   def new
     @event = Event.new
     @event.stages.build
@@ -14,7 +18,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     if @event.save
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       render :new
     end
@@ -27,7 +31,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update_attributes(params[:event])
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       render :edit
     end

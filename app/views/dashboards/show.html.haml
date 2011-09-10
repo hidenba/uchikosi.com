@@ -5,6 +5,16 @@
   %p
     = event.name
     = event.date
+    .staff_entry
+      - staff = event.staffs.registered(current_user_account.member).first
+      - if staff.present?
+        = Staff::Presence[staff.presence]
+        = link_to '取りやめる', [event, staff], method: :delete
+      - else
+        = link_to '参加', event_staffs_path(event,staff: {presence: Staff::Presence[:participation]}), method: :post
+        = link_to '不参加', event_staffs_path(event,staff: {presence: Staff::Presence[:non_participation]}), method: :post
+        = link_to '未定', event_staffs_path(event,staff: {presence: Staff::Presence[:suspense]}), method: :post
+
 
 %p= link_to 'メンバー一覧', :members
 %p= link_to 'イベント一覧', :events
