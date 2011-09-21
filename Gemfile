@@ -14,6 +14,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem "rails-backbone"
 gem 'active_enum'
+gem 'mechanize'
 
 gem 'devise'
 gem 'kaminari'
