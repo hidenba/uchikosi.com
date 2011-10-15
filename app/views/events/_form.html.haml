@@ -5,7 +5,10 @@
   %fieldset
     %legend イベント
     %p
-      = f.label :namein
+      = f.label :schedule
+      = f.text_field :schedule, class: 'schedule_date'
+    %p
+      = f.label :name
       = f.text_field :name
     %p
       = f.label :description
@@ -28,5 +31,8 @@
     $(function() {
       $('.schedule_date_time').datetimepicker({
         dateFormat: 'yyyy/mm/dd HH:MM'
+      });
+      $('.schedule_date').datepicker({
+        dateFormat: 'yy/mm/dd'
       });
     });

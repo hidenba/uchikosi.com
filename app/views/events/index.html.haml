@@ -2,6 +2,7 @@
 
 - @events.each do |event|
   %p
+    = event.schedule
     = event.name
     = event.description
     - event.stages.each do |stage|
