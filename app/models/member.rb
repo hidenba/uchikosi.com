@@ -17,4 +17,8 @@ class Member
   accepts_nested_attributes_for :emails
 
   validates :nickname, presence: true
+
+  def fullname
+    "#{last_name} #{first_name}"
+  end
 end

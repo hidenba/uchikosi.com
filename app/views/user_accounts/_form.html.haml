@@ -1,0 +1,15 @@
+- @user_account.errors.full_messages.each do |e|
+  %p= e
+
+= form_for @user_account do |f|
+  %dl
+    %dt= f.label :login_name
+    %dd= f.text_field :login_name
+    -if can? :create, @user_account
+      %dt= f.label :type
+      %dd= f.select :type, UserAccount::UserType.to_select, disabled: cannot?(:create, @user_account)
+    %dt= f.label :password
+    %dd= f.password_field :password
+    %dt= f.label :password_confirmation
+    %dd= f.password_field :password_confirmation
+  = f.submit

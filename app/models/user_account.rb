@@ -6,7 +6,8 @@ class UserAccount
 
   class UserType < ActiveEnum::Base
     value id: 1, name: 'member'
-    value id: 2, name: 'admin'
+    value id: 2, name: 'constitution'
+    value id: 3, name: 'admin'
   end
 
   field :login_name
@@ -23,6 +24,14 @@ class UserAccount
 
   def admin?
     type == UserType[:admin]
+  end
+
+  def constitution?
+    type == UserType[:constitution]
+  end
+
+  def member?
+    type == UserType[:member]
   end
 
   private

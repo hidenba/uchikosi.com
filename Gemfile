@@ -34,12 +34,10 @@ gem 'jquery-rails'
 
 gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test, :cucumber do
+group :development, :test do
+  gem 'rspec-rails'
   gem 'capybara'
-
-  group :development do
-    gem 'rspec-rails'
-    gem 'cucumber-rails'
-    gem 'fabrication'
-  end
+  gem 'capybara-webkit'
+  gem 'fabrication'
+  gem 'database_cleaner'
 end

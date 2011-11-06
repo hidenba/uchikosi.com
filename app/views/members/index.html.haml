@@ -2,16 +2,7 @@
 
 - @members.each do |member|
   %p
-    = member.first_name
-    = member.last_name
-    = member.nickname
-    - member.emails.each do |email|
-      = email.address
-    = member.due
-    - if can? :destroy, @member
-      = link_to '削除', member, method: :delete
-    - if can? :update, @member
-      = link_to '更新', edit_member_path(member)
+    = link_to member.nickname, [member]
 
 - if can? :create, Member
   = link_to 'アカウント新規作成', [:new, :user_account]

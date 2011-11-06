@@ -9,10 +9,9 @@ class Ability
       end
     else
       can :read, :all
-      can :manage, Staff
-      can :update, Member do |m|
-        m.user_account == user
-      end
+      can :update, Member, user_account: user
+      can :update, UserAccount, id: user.id
+      user.member? ? can(:manage, Staff) : can(:manage, [Staff, Event, Stage])
     end
   end
 end

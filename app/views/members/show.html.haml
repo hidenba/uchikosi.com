@@ -1,0 +1,15 @@
+%h2 メンバー詳細
+
+%dl
+  %dt ニックネーム
+  %dd= @member.nickname
+  %dt 氏名
+  %dd= @member.fullname
+  %dt メールアドレス
+  %dd= @member.emails.map(&:address).join(' ')
+
+-if can? :edit, @member
+  = link_to '編集', edit_member_path(@member)
+  = link_to 'アカウント編集', edit_user_account_path(@member.user_account)
+-if can? :destroy, @member
+  = link_to '削除', [@member], method: :delete, confirm: '削除します。よろしいですか？'
