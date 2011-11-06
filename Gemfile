@@ -5,8 +5,8 @@ gem 'rails', '~> 3.1'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem "mongoid", "~> 2.1"
-gem "bson_ext", "~> 1.3"
+gem "mongoid", "~> 2.2"
+gem "bson_ext"
 gem 'haml-rails'
 gem 'tapp'
 gem 'cancan'
@@ -17,6 +17,7 @@ gem 'active_enum'
 gem 'mechanize'
 
 gem 'devise'
+gem 'cancan'
 gem 'kaminari'
 
 gem 'heroku'
@@ -31,13 +32,6 @@ end
 
 gem 'jquery-rails'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
 gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :cucumber do

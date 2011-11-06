@@ -1,0 +1,21 @@
+!!!5
+
+%html
+  %head
+    %title 打越太鼓
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  = yield :javascript
+
+  %body
+    #head_menu
+      %ul.head_menu
+        %li= link_to 'ダッシュボード', :dashboard
+        %li= link_to 'メンバー一覧', :members
+        %li= link_to 'イベント一覧', :events
+      %div{style: 'clear: both'}
+    #content
+      = yield
+
+    #footer

@@ -1,11 +1,2 @@
-%h2 Hoge
-
-今後の予定
-- Event.future_plan.each do |event|
-  %p
-    = event.name
-    = event.schedule
-    = render 'share/staff_entry', locals: {event: event}
-
-%p= link_to 'メンバー一覧', :members
-%p= link_to 'イベント一覧', :events
+%h3 今後の予定
+= render partial: 'share/event_list', locals: {events: Event.future_plan}

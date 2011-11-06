@@ -4,26 +4,26 @@
 = form_for @event do |f|
   %fieldset
     %legend イベント
-    %p
-      = f.label :schedule
-      = f.text_field :schedule, class: 'schedule_date'
-    %p
-      = f.label :name
-      = f.text_field :name
-    %p
-      = f.label :description
-      = f.text_area :description
+    %dl
+      %dt= f.label :schedule
+      %dd= f.text_field :schedule, class: 'schedule_date'
+      %dt= f.label :name
+      %dd= f.text_field :name
+      %dt= f.label :description
+      %dd= f.text_area :description
 
   = f.fields_for :stages, @event.stages do |m|
-    %fieldset.stage
-      %legend ステージ
-      %p
-        = m.label :place
-        = m.text_field :place
-      %p
-        = m.label :schedule
-        = m.text_field :schedule, value: m.object.schedule ? m.object.schedule.strftime('%Y/%m/%d %H:%M') : '', class: 'schedule_date_time'
-
+    .stage
+      %fieldset
+        %legend ステージ
+        %dl
+          %dt= m.label :place
+          %dd= m.text_field :place
+          %dt= m.label :start_time
+          %dd= m.text_field :start_time, value: m.object.start_time ? m.object.start_time.strftime('%Y/%m/%d %H:%M') : '', class: 'schedule_date_time'
+        =m.hidden_field :_destroy
+        %input{type: 'button', value: '削除', class: 'stage_delete'}
+  %input{type: 'button', value: 'ステージを追加', class: 'stage_add'}
   = f.submit
 
 = content_for :javascript do
@@ -32,7 +32,49 @@
       $('.schedule_date_time').datetimepicker({
         dateFormat: 'yyyy/mm/dd HH:MM'
       });
+
       $('.schedule_date').datepicker({
         dateFormat: 'yy/mm/dd'
       });
+
+      $('.stage_add').bind('click', function(){
+        var dom = $('.stage:visible').last().clone(true);
+        $('input:text', dom).each(function(){
+          id = $(this).attr('id');
+          count=Number(id.match(/\d/))+1;
+          name = $(this).attr('name');
+          $(this).attr('id', id.replace(/\d/, count));
+          $(this).attr('name',name.replace(/\d/, count));
+          $(this).val('');
+        });
+        datetime=$('.schedule_date_time', dom)
+        datetime.unbind();
+        datetime.removeClass();
+        count=Number(datetime.attr('id').match(/\d/));
+        datetime_class='datetime'+count;
+        datetime.addClass(datetime_class);
+        datetime.addClass('schedule_date_time');
+        $('.'+datetime_class, dom).datetimepicker({
+          dateFormat: 'yyyy/mm/dd HH:MM'
+        });
+
+        $('.stage').last().after(dom);
+        toggle_delete();
+      });
+
+      $('.stage_delete').bind('click', function(){
+        $('[id$=_destroy]',$(this).closest('.stage')).val(true);
+        $(this).closest('.stage').hide();
+        toggle_delete();
+      });
+
+      toggle_delete();
     });
+
+    function toggle_delete() {
+      if($('.stage:visible').size() != 1) {
+        $('.stage_delete').removeAttr('disabled');
+      } else {
+        $('.stage_delete').attr('disabled', 'disabled');
+      }
+    }

@@ -7,7 +7,7 @@ class Staff
     value id: 3, name: 'suspense'
   end
 
-  belongs_to :event
+  belongs_to :stage
   belongs_to :member
 
   field :presence, type: Integer

@@ -4,7 +4,8 @@ class StaffsController < ApplicationController
 
   def create
     event = Event.find(params[:event_id])
-    event.staffs.create!(params[:staff].merge(member: current_user_account.member))
+    stage = event.stages.find(params[:stage_id])
+    stage.staffs.create!(params[:staff].merge(member: current_user_account.member))
     redirect_to :back
   end
 

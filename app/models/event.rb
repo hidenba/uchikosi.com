@@ -6,8 +6,7 @@ class Event
   field :schedule, type: Date
 
   embeds_many :stages
-  accepts_nested_attributes_for :stages
-  has_many :staffs
+  accepts_nested_attributes_for :stages, allow_destroy: true
 
   validates :name, presence: true
 

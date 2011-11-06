@@ -26,11 +26,12 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    @event.stages.build if @event.stages.size.zero?
   end
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(params[:event])
+    if @event.update_attributes params[:event].to_hash
       redirect_to event_path(@event)
     else
       render :edit

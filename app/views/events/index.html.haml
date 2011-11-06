@@ -1,14 +1,3 @@
 %h2 イベント一覧
-
-- @events.each do |event|
-  %p
-    = event.schedule
-    = event.name
-    = event.description
-    - event.stages.each do |stage|
-      = stage.place
-      = l stage.schedule, format: :middle if stage.schedule.present?
-    = event.staffs.count
-    = link_to '詳細', event_path(event)
+= render partial: 'share/event_list', locals: {events: @events}
 = link_to 'イベント作成', [:new, :event]
-= link_to 'ダッシュボード', dashboard_path

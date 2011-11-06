@@ -1,5 +1,5 @@
 UchikosiCom::Application.routes.draw do
-  root :to => 'top#index'
+  root :to => 'dashboards#show'
 
   devise_for :user_account
 
@@ -11,8 +11,9 @@ UchikosiCom::Application.routes.draw do
 
 
   resources :events do
-    resources :stages
-    resources :staffs, only: %w(create destroy)
+    resources :stages do
+      resources :staffs, only: %w(create destroy)
+    end
   end
 
 

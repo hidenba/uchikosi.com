@@ -1,25 +1,10 @@
-%h2 イベント詳細
-
+%h2= @event.name
 %p= @event.schedule
-%p= @event.name
 %p= @event.description
 - @event.stages.each do |stage|
   %p
     = stage.place
-    = l stage.schedule, format: :middle if stage.schedule.present?
-
-%p
-  participation
-  = @event.staffs.participations.map{|s| s.member.nickname }.join(',')
-%p
-  non_participation
-  = @event.staffs.non_participations.map{|s| s.member.nickname }.join(',')
-%p
-  suspense
-  = @event.staffs.suspense.map{|s| s.member.nickname }.join(',')
+    = l stage.start_time, format: :middle if stage.start_time.present?
 
 = link_to '削除', @event, method: :delete
 = link_to '更新', edit_event_path(@event)
-
-= link_to 'ダッシュボード', dashboard_path
-= link_to 'イベント一覧', events_path

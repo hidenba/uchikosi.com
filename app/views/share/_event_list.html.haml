@@ -1,0 +1,15 @@
+%table
+  %thead
+    %tr
+      %td イベント
+      %td 場所
+      %td 日時
+      %td
+  %tbody
+    - events.each do |event|
+      - event.stages.each_with_index do |stage,ix|
+        %tr
+          %td= link_to event.name, [event] if ix.zero?
+          %td= stage.place
+          %td=l stage.start_time, format: :middle
+          %td= render partial: 'share/staff_entry', locals: {stage: stage}
