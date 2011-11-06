@@ -4,7 +4,13 @@ class UserAccount
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
+  class UserType < ActiveEnum::Base
+    value id: 1, name: 'member'
+    value id: 2, name: 'admin'
+  end
+
   field :login_name
+  field :type, type: Integer, default: 1
 
   belongs_to :member
 
@@ -14,6 +20,10 @@ class UserAccount
   validates :email, presence: { if: :email_required? }
 
   attr_accessible :login_name, :password, :password_confirmation, :remember_me
+
+  def admin?
+    type == UserType[:admin]
+  end
 
   private
 

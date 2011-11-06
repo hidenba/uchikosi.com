@@ -6,5 +6,6 @@
     = stage.place
     = l stage.start_time, format: :middle if stage.start_time.present?
 
-= link_to '削除', @event, method: :delete
-= link_to '更新', edit_event_path(@event)
+- if can? [:update, :destroy], @event
+  = link_to '削除', @event, method: :delete
+  = link_to '更新', edit_event_path(@event)

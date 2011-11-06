@@ -1,3 +1,4 @@
 %h2 イベント一覧
 = render partial: 'share/event_list', locals: {events: @events}
-= link_to 'イベント作成', [:new, :event]
+- if can? :create, Event
+  = link_to 'イベント作成', [:new, :event]
