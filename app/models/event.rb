@@ -7,6 +7,7 @@ class Event
 
   embeds_many :stages
   accepts_nested_attributes_for :stages, allow_destroy: true
+  embeds_many :comments
 
   validates :name, presence: true
 
