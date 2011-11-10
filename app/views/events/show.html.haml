@@ -1,11 +1,22 @@
 %h2= @event.name
-%p= @event.schedule
-%p= @event.description
+
+%dl.detail
+  %dt 日時
+  %%dd=l @event.schedule, format: :long
+  %dt 詳細
+  %dd= @event.description
+.clear
 - @event.stages.each do |stage|
-  %p
-    = stage.place
-    = l stage.start_time, format: :middle if stage.start_time.present?
+  %h3= stage.place
+  %dl.detail
+    %dt 演奏時間
+    %dd=l stage.start_time, format: :middle if stage.start_time.present?
+    - paticipations = stage.staffs.participations
+    %dt 参加者(#{paticipations.count}人)
+    %dd= stage.staffs.participations.map(&:member).map(&:nickname).join(',')
+  .clear
 
 - if can? [:update, :destroy], @event
-  = link_to '削除', @event, method: :delete
-  = link_to '更新', edit_event_path(@event)
+  .modify_link
+    = link_to '削除', @event, method: :delete
+    = link_to '更新', edit_event_path(@event)

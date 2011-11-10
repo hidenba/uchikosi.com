@@ -2,8 +2,8 @@
   - staff = stage.staffs.registered(current_user_account.member).first
   - if staff.present?
     =t Staff::Presence[staff.presence], scope: 'label.presence'
-    = link_to '取りやめる', [stage.event, stage, staff], method: :delete
+    = link_to '_', [stage.event, stage, staff], method: :delete
   - else
     = link_to t('label.presence.participation'), event_stage_staffs_path(stage.event, stage, staff: {presence: Staff::Presence[:participation]}), method: :post
-    = link_to t('label.presence.non_participation'), event_stage_staffs_path(stage.event, stage, staff: {presence: Staff::Presence[:non_participation]}), method: :post
     = link_to t('label.presence.suspense'), event_stage_staffs_path(stage.event, stage, staff: {presence: Staff::Presence[:suspense]}), method: :post
+    = link_to t('label.presence.non_participation'), event_stage_staffs_path(stage.event, stage, staff: {presence: Staff::Presence[:non_participation]}), method: :post
