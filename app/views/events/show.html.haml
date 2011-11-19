@@ -16,6 +16,19 @@
     %dd= stage.staffs.participations.map(&:member).map(&:nickname).join(',')
   .clear
 
+#comments
+  - @event.comments.each do |comment|
+    .comment
+      .author
+        = comment.author.nickname
+      .body
+        = simple_format comment.body
+
+= form_for [@event, Comment.new] do |f|
+  = f.text_area :body, class: 'body'
+  = f.submit '書きこむ'
+
+
 - if can? [:update, :destroy], @event
   .modify_link
     = link_to '削除', @event, method: :delete

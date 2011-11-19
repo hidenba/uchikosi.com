@@ -3,7 +3,7 @@ class Comment
   include Mongoid::Timestamps
   include Mongoid::Paranoia
 
-  field body
+  field :body
 
   belongs_to :author, class_name: Member.to_s
   embedded_in :event

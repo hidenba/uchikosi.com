@@ -14,6 +14,7 @@ UchikosiCom::Application.routes.draw do
     resources :stages do
       resources :staffs, only: %w(create destroy)
     end
+    resources :comments, only: %w(create)
   end
 
 
