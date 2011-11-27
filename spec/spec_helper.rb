@@ -34,6 +34,8 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
   end
+
+  config.include AcceptanceTestHelpers
 end
 
 Capybara.javascript_driver = :webkit
