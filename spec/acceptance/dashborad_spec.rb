@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
+require 'acceptance/shared_context/events'
+require 'acceptance/shared_example/events'
 
 feature 'ダッシュボードの表示' do
   let(:account ) { Fabricate :user_account }
-  let!(:event) { Fabricate :event, name: 'いべんと', schedule: 2.day.since, stages: [stage_a, stage_b] }
-  let(:stage_a) { Fabricate.build :stage, place: 'ばしょA', start_time: 2.day.since }
-  let(:stage_b) { Fabricate.build :stage, place: 'ばしょB', start_time: 3.day.since }
+  include_context 'イベント'
 
   let(:line1) { 'tbody tr:nth-child(1)' }
   let(:line2) { 'tbody tr:nth-child(2)' }
@@ -33,27 +33,5 @@ feature 'ダッシュボードの表示' do
     end
   end
 
-  scenario '参加予定を登録できる' do
-    find(line1).click_link('◯')
-
-    within(line1) do
-      page.should have_link('_')
-      page.should have_content '◯'
-      page.should_not have_link('◯')
-      page.should_not have_link('△')
-      page.should_not have_link('×')
-    end
-  end
-
-  scenario '参加予定をキャンセルできる' do
-    find(line1).click_link('◯')
-    find(line1).click_link('_')
-
-    within(line1) do
-      page.should have_link('◯')
-      page.should have_link('△')
-      page.should have_link('×')
-    end
-  end
-
+  it_should_behave_like '参加予定の登録'
 end

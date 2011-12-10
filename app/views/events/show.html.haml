@@ -8,7 +8,7 @@
 .clear
 - @event.stages.each do |stage|
   %h3= stage.place
-  %dl.detail
+  %dl.stage_detail
     %dt 演奏時間
     %dd=l stage.start_time, format: :middle if stage.start_time.present?
     - paticipations = stage.staffs.participations
