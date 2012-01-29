@@ -10,6 +10,10 @@ UchikosiCom::Application.routes.draw do
   resources :members, except: %w(new create)
 
 
+  resources :stages, only: [] do
+    resources :constitution
+  end
+
   resources :events do
     resources :stages do
       resources :staffs, only: %w(create destroy)

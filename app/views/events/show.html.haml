@@ -14,6 +14,8 @@
     - paticipations = stage.staffs.participations
     %dt 参加者(#{paticipations.count}人)
     %dd= stage.staffs.participations.map(&:member).map(&:nickname).join(',')
+    %dt 構成
+    %dd= link_to 'コンテ作成', [:new, stage, :constitution]
   .clear
 
 #comments
