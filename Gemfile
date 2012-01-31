@@ -12,7 +12,6 @@ gem 'tapp'
 gem 'cancan'
 gem 'execjs'
 gem 'therubyracer'
-gem "rails-backbone"
 gem 'active_enum'
 gem 'mechanize'
 
