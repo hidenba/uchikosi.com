@@ -8,15 +8,18 @@
     = csrf_meta_tags
     = yield :javascript
 
+
+
   %body
     #head_menu
       - if user_account_signed_in?
-        %ul.head_menu
-          %li= link_to 'ダッシュボード', :dashboard
-          %li= link_to 'メンバー一覧', :members
-          %li= link_to 'イベント一覧', :events
-          %li= link_to 'ログアウト', destroy_user_account_session_path, :method => :delete
-        %div{style: 'clear: both'}
+        #tabs
+          %ul.head_menu
+            %li= link_to 'ダッシュボード', :dashboard
+            %li= link_to 'メンバー一覧', :members
+            %li= link_to 'イベント一覧', :events
+            %li= link_to 'ログアウト', destroy_user_account_session_path, :method => :delete
+          %div{style: 'clear: both'}
     #content
       = yield
 
